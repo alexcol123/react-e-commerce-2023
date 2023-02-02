@@ -1,12 +1,8 @@
 import express from 'express';
+import { users } from '../controllers/auth.js';
 
 const router = express.Router()
 
-router.get('/users', (req, res) =>{
-  console.log('ran')
-  res.json({
-    data: 'Alexopolis  Phersepolis ',
-  })
-})
+router.get('/users', users)
 
 export default router
