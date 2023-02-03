@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
 
-const userSchema = new mongoose.Schema(
+
+const UserSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -34,5 +36,17 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
+
+UserSchema.pre('save', async function(){
+  if (!this.isModified('password')) return;
+  const salt = bcrypt.genSalt(10)
+  this.password = await bcrypt.hash(this.password, salt)
+})
+
+UserSchema.comparePassword = async function(candidatePassword){
+  const isMatch= await bcrypt.compare(candidatePassword, this.password)
+  return isMatch
+}
+
 //Export the model
-export default mongoose.model('User', userSchema)
+export default mongoose.model('User', UserSchema)

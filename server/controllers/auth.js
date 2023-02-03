@@ -1,6 +1,6 @@
-export const users = (req, res) => {
+export const register = (req, res) => {
 
-  res.json({
-    data: 'Alexopolis  Phersepolis ',
-  })
+const {name, email, password}= req.body
+
+  res.json({ sucess: true, name, email})
 }
