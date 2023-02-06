@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import morgan from 'morgan'
 import mongoose from 'mongoose'
 import authRoutes from './routes/auth.js'
+import categoryRoutes from './routes/category.js'
 
 dotenv.config()
 const app = express()
@@ -27,12 +28,13 @@ mongoose
 //   })
 // })
 
-// Middlewares 
-app.use(express.json());
+// Middlewares
+app.use(express.json())
 app.use(morgan('dev'))
 
 // router middleware
 app.use('/api', authRoutes)
+app.use('/api', categoryRoutes)
 
 const port = process.env.PORT || 8000
 

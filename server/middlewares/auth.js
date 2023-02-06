@@ -12,7 +12,7 @@ export const requireSignin = (req, res, next) => {
     req.user = decoded
     next()
   } catch (err) {
-    return res.status(401).json(err)
+    return res.status(401).json({message: 'You must loggin to do this.'})
   }
 }
 
