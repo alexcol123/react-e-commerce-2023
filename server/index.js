@@ -4,6 +4,8 @@ import morgan from 'morgan'
 import mongoose from 'mongoose'
 import authRoutes from './routes/auth.js'
 import categoryRoutes from './routes/category.js'
+import productRoutes from './routes/product.js'
+import cloudinary from 'cloudinary'
 
 dotenv.config()
 const app = express()
@@ -28,6 +30,14 @@ mongoose
 //   })
 // })
 
+// Cloudinary 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+})
+
+
 // Middlewares
 app.use(express.json())
 app.use(morgan('dev'))
@@ -35,6 +45,7 @@ app.use(morgan('dev'))
 // router middleware
 app.use('/api', authRoutes)
 app.use('/api', categoryRoutes)
+app.use('/api', productRoutes)
 
 const port = process.env.PORT || 8000
 

@@ -1,34 +1,33 @@
 import jwt from 'jsonwebtoken'
 import User from '../models/user.js'
 
-
 export const requireSignin = (req, res, next) => {
-  // console.log(req.headers.authorization)
+  // console.log('REQ HEADERS =>', req.headers)
+  // next()
+
   try {
     const decoded = jwt.verify(
       req.headers.authorization,
       process.env.JWT_SECRET
     )
+    // console.log('REQ DECODED =>', decoded)
+
     req.user = decoded
     next()
   } catch (err) {
-    return res.status(401).json({message: 'You must loggin to do this.'})
+    return res.status(401).json({err, message: 'You must login to access this'})
   }
 }
 
-
-export const isAdmin = async(req, res, next) => {
-  
+export const isAdmin = async (req, res, next) => {
   try {
-    const user = await User.findById(req.user._id)    
-  
-    if(user.role !==1){
+    const user = await User.findById(req.user._id)
+
+    if (user.role !== 1) {
       return res.status(401).send('Unauthorized')
-    }else{
+    } else {
       next()
     }
-   
-    next()
   } catch (err) {
     return res.status(401).json(err)
   }
