@@ -11,7 +11,7 @@ function App() {
     <BrowserRouter>
       <Menu />
 
-      <div style={{ marginTop: '63px' }} className=''>
+      <div style={{ marginTop: '55px' }} className=''>
         <Toaster />
         <Routes>
           <Route path='/' element={<Home />} />

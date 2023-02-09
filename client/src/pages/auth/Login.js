@@ -1,10 +1,14 @@
 import { useState } from 'react'
+import { useAuth } from '../../context/auth'
 import Jumbotron from '../../components/cards/Jumbotron'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
 
 const Login = () => {
+  // Context
+  const [auth, setAuth] = useAuth()
+  // State
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -20,6 +24,8 @@ const Login = () => {
       if (data.error) {
         toast.error(data.error)
       } else {
+        localStorage.setItem('auth', JSON.stringify(data))
+        setAuth({ ...auth, token: data.token, user: data.user })
         toast.success('Login Sucessful')
       }
     } catch (err) {
@@ -80,7 +86,7 @@ const Login = () => {
                 <p className='text-white'>
                   Not a member yet
                   <Link
-                    to={'/login'}
+                    to={'/register'}
                     className='text-warning text-decoration-none fw-bold ps-2 '
                   >
                     Register
@@ -88,7 +94,6 @@ const Login = () => {
                 </p>
               </div>
             </div>
-            !
           </div>
         </form>
       </div>
