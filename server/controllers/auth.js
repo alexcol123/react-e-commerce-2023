@@ -52,7 +52,10 @@ export const login = async (req, res) => {
 
 export const register = async (req, res) => {
   // Destructure
-  const { name, email, password, address } = req.body
+  let { name, email, password, address } = req.body
+
+  email = email.toLowerCase()
+
   try {
     // Validate
 
@@ -62,6 +65,14 @@ export const register = async (req, res) => {
       return res.json({
         error: 'Password is required and should be 6 characters or more',
       })
+
+    // Check if user with that email exists
+    const userExist = await User.findOne({ email })
+    if (userExist) {
+      res.json({
+        error: 'User alredy register with that email , try to login',
+      })
+    }
 
     // Save user to DB
     const user = await User.create({ name, email, password, address })

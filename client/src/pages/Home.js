@@ -1,19 +1,12 @@
 import React from 'react'
+import Jumbotron from '../components/cards/Jumbotron'
+
 
 const Home = () => {
   return (
-    <div className='container'>
-      home ipsum dolor sit, amet consectetur adipisicing elit. Natus vitae
-      veniam praesentium doloremque repudiandae atque quo, hic voluptatum optio
-      id cum. Quisquam, exercitationem ex! Error eaque voluptatem ea perferendis
-      esse deleniti vel delectus placeat doloremque nisi officia quos iste
-      rerum, quis ut nesciunt aut inventore quam harum earum officiis pariatur.
-      Aliquam hic earum impedit, atque architecto voluptates laboriosam soluta
-      itaque placeat in dolorem voluptate veniam cupiditate et tempore nam sed
-      repellat quas sit doloremque voluptatum ipsum praesentium! Error, ipsum
-      quo eum debitis vel molestiae dolorum reiciendis laboriosam ducimus
-      praesentium laudantium delectus, aut architecto non dolorem accusantium.
-      Iusto voluptatem praesentium distinctio.
+    <div>
+      <Jumbotron title='Adidas Store'  />
+      <h1> This is Home page</h1>
     </div>
   )
 }
