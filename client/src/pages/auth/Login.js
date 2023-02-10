@@ -3,11 +3,13 @@ import { useAuth } from '../../context/auth'
 import Jumbotron from '../../components/cards/Jumbotron'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Login = () => {
   // Context
   const [auth, setAuth] = useAuth()
+  // 
+  const navigate = useNavigate()
   // State
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -27,6 +29,7 @@ const Login = () => {
         localStorage.setItem('auth', JSON.stringify(data))
         setAuth({ ...auth, token: data.token, user: data.user })
         toast.success('Login Sucessful')
+        navigate('/dashboard')
       }
     } catch (err) {
       console.log(err)
