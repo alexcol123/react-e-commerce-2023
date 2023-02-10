@@ -44,6 +44,16 @@ const Menu = () => {
                     Home
                   </NavLink>
                 </li>
+                <li className='nav-item '>
+                  <NavLink
+                    className='nav-link text-white '
+                    aria-current='page'
+                    to='/dashboard/secret'
+                  >
+                    Secret
+                  </NavLink>
+                </li>
+        
 
                 <li className='nav-item'>
                   <NavLink

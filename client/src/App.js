@@ -7,6 +7,8 @@ import Register from './pages/auth/Register'
 import Menu from './components/nav/Menu'
 import Dashboard from './pages/user/Dashboard'
 import PrivateRoute from './components/routes/PrivateRoute'
+import NotFoundPage from './pages/NotFoundPage'
+import Secret from './pages/Secret'
 
 function App() {
   return (
@@ -22,8 +24,11 @@ function App() {
 
           {/* Private Route */}
           <Route path='/dashboard' element={<PrivateRoute />}>
-            <Route path='' element={<Dashboard />} />
+            <Route index  element={<Dashboard />} />
+            <Route path='secret' element={ <Secret />} />
           </Route>
+
+          <Route path='*' element={< NotFoundPage />}  replace/>
         </Routes>
       </div>
     </BrowserRouter>
