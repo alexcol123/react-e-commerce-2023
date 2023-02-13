@@ -10,7 +10,7 @@ const NotFoundPage = () => {
       <img src={notFoundImage} alt='404' style={{ width: '700px' }} />
       <h4>That page does not exist</h4>
 
-      <Link type='button' class='btn btn-warning mt-5' to={'/'}>
+      <Link type='button' className='btn btn-warning mt-5' to={'/'}>
         Go Back
       </Link>
     </div>

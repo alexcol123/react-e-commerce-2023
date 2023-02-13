@@ -1,4 +1,14 @@
-.active{
-font-weight: bold;
-color: #FFC106 !important
+.active {
+  font-weight: bold;
+  color: #ffc106 !important;
+  background: rgb(60, 59, 59) !important;
+  border-color: #ffc106 !important;
+}
+
+.dropdownItem {
+  transition: all 0.3s ease-in;
+}
+
+.dropdownItem:hover {
+  background: #ffc10615 !important;
 }

@@ -8,7 +8,12 @@ import Menu from './components/nav/Menu'
 import Dashboard from './pages/user/Dashboard'
 import PrivateRoute from './components/routes/PrivateRoute'
 import NotFoundPage from './pages/NotFoundPage'
-import Secret from './pages/Secret'
+import AdminDashboard from './pages/admin/AdminDashboard'
+import AdminRoute from './components/routes/AdminRoute'
+import AdminProduct from './pages/admin/AdminProduct'
+import AdminCategory from './pages/admin/AdminCategory'
+import UserProfile from './pages/user/UserProfile'
+import UserOrders from './pages/user/UserOrders'
 
 function App() {
   return (
@@ -22,13 +27,21 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
 
-          {/* Private Route */}
+          {/* User Private Routes  */}
           <Route path='/dashboard' element={<PrivateRoute />}>
-            <Route index  element={<Dashboard />} />
-            <Route path='secret' element={ <Secret />} />
+            <Route path='user' element={<Dashboard />} />
+            <Route path='user/profile' element={<UserProfile />} />
+            <Route path='user/orders' element={<UserOrders />} />
           </Route>
 
-          <Route path='*' element={< NotFoundPage />}  replace/>
+          {/* Admin Private Routes  */}
+          <Route path='/dashboard' element={<AdminRoute />}>
+            <Route path='admin' element={<AdminDashboard />} />
+            <Route path='admin/product' element={<AdminProduct />} />
+            <Route path='admin/category' element={<AdminCategory />} />
+          </Route>
+
+          <Route path='*' element={<NotFoundPage />} replace />
         </Routes>
       </div>
     </BrowserRouter>

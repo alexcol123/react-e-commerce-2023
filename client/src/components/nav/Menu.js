@@ -53,7 +53,6 @@ const Menu = () => {
                     Secret
                   </NavLink>
                 </li>
-        
 
                 <li className='nav-item'>
                   <NavLink
@@ -93,16 +92,24 @@ const Menu = () => {
                     data-bs-toggle='dropdown'
                     aria-expanded='false'
                   >
-                    Dropdown
+                    {auth?.user?.name}
                   </div>
-                  <ul className='dropdown-menu m-0 p-0'>
-                    <li>
-                      <NavLink className='dropdown-item bg-white' to='/test'>
-                        Action
+                  <ul className='dropdown-menu m-1 p-1'>
+                    <li className='nav-item'>
+                      <NavLink
+                        className='dropdown-item bg-white dropdownItem'
+                        to={`/dashboard/${
+                          auth?.user?.role === 1 ? 'admin' : 'user'
+                        }`}
+                      >
+                        Dashboard
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink className='dropdown-item bg-white' to='/test1'>
+                      <NavLink
+                        className='dropdown-item bg-white dropdownItem'
+                        to='/test1'
+                      >
                         Another action
                       </NavLink>
                     </li>

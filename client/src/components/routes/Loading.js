@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
-const Loading = () => {
+const Loading = ({ path = 'login' }) => {
   // state
   const [count, setCount] = useState(5)
   // hooks
@@ -13,7 +13,7 @@ const Loading = () => {
       setCount((currentCount) => --currentCount)
     }, 1000)
     // Redirect once count is equal to 0
-    count === 0 && navigate('/login', {state: location.pathname })
+    count === 0 && navigate(`/${path}`, { state: location.pathname })
     // cleanup
     return () => clearInterval(interval)
   }, [count])
@@ -22,14 +22,14 @@ const Loading = () => {
     <div>
       <div className='d-flex flex-column justify-content-center align-items-center vh-100'>
         <h3 className='mb-3'>You must login to access this page</h3>
-        <h5 className='mb-5' >Redirecting you in {count} seconds</h5>
+        <h5 className='mb-5'>Redirecting you in {count} seconds</h5>
         {/* Loading */}
         <div
-          class='spinner-border text-warning'
+          className='spinner-border text-warning'
           style={{ width: '4rem', height: '4rem' }}
           role='status'
         >
-          <span class='visually-hidden'>Loading...</span>
+          <span className='visually-hidden'>Loading...</span>
         </div>
       </div>
     </div>
