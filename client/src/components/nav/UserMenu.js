@@ -8,6 +8,11 @@ const UserMenu = () => {
       </div>
       <ul className='list-group list-unstyled'>
         <li>
+          <NavLink className='list-group-item ' to='/dashboard/user/'>
+            Dashboard
+          </NavLink>
+        </li>
+        <li>
           <NavLink className='list-group-item ' to='/dashboard/user/profile'>
             Profile
           </NavLink>

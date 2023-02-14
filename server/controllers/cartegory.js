@@ -58,7 +58,7 @@ export const remove = async (req, res) => {
 
 export const list = async (req, res) => {
   try {
-    const all = await Category.find()
+    const all = await Category.find().sort({name: 1})
     res.json(all)
   } catch (error) {
     console.log(error)

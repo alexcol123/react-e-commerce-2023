@@ -24,7 +24,7 @@ const AdminProduct = () => {
           {/* Main */}
           <div className='col-md-9'>
             <div className='p-3 mb-2  border mt-1'>
-              <h4 className='text-center '>Product Info</h4>
+              <h4 className='text-center '>Create Product</h4>
             </div>
 
             <h3>Crete Product Form</h3>

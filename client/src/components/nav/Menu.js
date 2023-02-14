@@ -99,7 +99,7 @@ const Menu = () => {
                       <NavLink
                         className='dropdown-item bg-white dropdownItem'
                         to={`/dashboard/${
-                          auth?.user?.role === 1 ? 'admin' : 'user'
+                          auth?.user?.role === 1 ? 'admin/' : 'user/'
                         }`}
                       >
                         Dashboard
