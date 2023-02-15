@@ -14,6 +14,7 @@ import AdminProduct from './pages/admin/AdminProduct'
 import AdminCategory from './pages/admin/AdminCategory'
 import UserProfile from './pages/user/UserProfile'
 import UserOrders from './pages/user/UserOrders'
+import AdminProductList from './pages/admin/AdminProductList'
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             <Route path='admin' element={<AdminDashboard />} />
             <Route path='admin/product' element={<AdminProduct />} />
             <Route path='admin/category' element={<AdminCategory />} />
+            <Route path='admin/products' element={<AdminProductList />} />
           </Route>
 
           <Route path='*' element={<NotFoundPage />} replace />

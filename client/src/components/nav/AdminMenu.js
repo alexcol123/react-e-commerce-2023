@@ -24,6 +24,13 @@ const AdminNav = () => {
             Create Product
           </NavLink>
         </li>
+
+
+        <li>
+          <NavLink className='list-group-item ' to='/dashboard/admin/products'>
+             Products List
+          </NavLink>
+        </li>
       </ul>
     </div>
   )
