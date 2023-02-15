@@ -146,7 +146,7 @@ export const update = async (req, res) => {
       // Delete photo in cloudinay + Add New photo
       const resp = await cloudinary.v2.uploader.destroy(imageToDelete)
       // If deleted cloudinary should send us a  reponce like: { result: 'ok' }
-      console.log(resp)
+      // console.log(resp)
       // Upload image to cloudinary
       const result = await cloudinary.v2.uploader.upload(photo.path, {
         folder: 'products2023',

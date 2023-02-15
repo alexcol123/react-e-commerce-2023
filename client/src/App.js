@@ -15,6 +15,7 @@ import AdminCategory from './pages/admin/AdminCategory'
 import UserProfile from './pages/user/UserProfile'
 import UserOrders from './pages/user/UserOrders'
 import AdminProductList from './pages/admin/AdminProductList'
+import AdminProductUpdate from './pages/admin/AdminProductUpdate'
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
             <Route path='admin/product' element={<AdminProduct />} />
             <Route path='admin/category' element={<AdminCategory />} />
             <Route path='admin/products' element={<AdminProductList />} />
+            <Route path='admin/product/update/:slug' element={<AdminProductUpdate />} />
           </Route>
 
           <Route path='*' element={<NotFoundPage />} replace />

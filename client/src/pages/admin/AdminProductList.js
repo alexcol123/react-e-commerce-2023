@@ -12,7 +12,6 @@ const AdminProductList = () => {
   const [auth, setAuth] = useAuth()
   // State
   const [products, setProducts] = useState([])
-  console.log(products)
 
   const loadProducts = async () => {
     try {
@@ -66,12 +65,14 @@ const AdminProductList = () => {
 
                     <div className='col-md-8 '>
                       <div className='card-body '>
-                        <h4 className='card-title mt-3  text-warning-emphasis'>{p.name}</h4>
+                        <h4 className='card-title mt-3  text-warning-emphasis'>
+                          {p.name}
+                        </h4>
                         <p className='card-text mt-3'>
                           {p.description.substring(0, 175)}...
                         </p>
                         <p className='card-text'>
-                          <small  className='text-warning-emphasis'>
+                          <small className='text-warning-emphasis'>
                             Created: {moment(p.createdAt).format('MMM Do YY')}
                           </small>
                         </p>

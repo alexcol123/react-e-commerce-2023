@@ -3,7 +3,6 @@ import slugyfy from 'slugify'
 
 export const create = async (req, res) => {
   try {
-    console.log(req.body)
     const { name } = req.body
     if (!name.trim()) {
       return res.json({ error: 'Category Name is required' })
@@ -58,7 +57,7 @@ export const remove = async (req, res) => {
 
 export const list = async (req, res) => {
   try {
-    const all = await Category.find().sort({name: 1})
+    const all = await Category.find().sort({ name: 1 })
     res.json(all)
   } catch (error) {
     console.log(error)
@@ -67,7 +66,6 @@ export const list = async (req, res) => {
 }
 
 export const read = async (req, res) => {
-  
   try {
     const category = await Category.findOne({ slug: req.params.slug })
     res.json(category)
