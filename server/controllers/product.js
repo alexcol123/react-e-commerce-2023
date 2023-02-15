@@ -18,6 +18,7 @@ export const create = async (req, res) => {
       return
     }
 
+
     // Validation
     if (!name || !name.trim()) return res.json('Name is required')
     if (!description || !description.trim())
