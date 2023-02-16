@@ -6,6 +6,28 @@
   position: absolute;
 }
 
+.myAbsoluteCard {
+  position: absolute;
+  top: 3%;
+  right: 10px;
+}
+
+.myAbsoluteCard {
+  position: absolute;
+  top: 3%;
+  right: 10px;
+  opacity: 18%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover .myAbsoluteCard {
+  opacity: 70%;
+  transition: all .3s ease-in;
+
+
+}
+
 .myModal {
   left: 50%;
   top: 50%;
@@ -17,8 +39,7 @@
 }
 
 body {
- 
-   background-color: #efeeee !important; 
+  background-color: #efeeee !important;
 }
 
 .active {

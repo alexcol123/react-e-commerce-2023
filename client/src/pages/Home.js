@@ -36,14 +36,14 @@ const Home = () => {
       <Jumbotron title='Adidas' />
 
       <div className='container-lg'>
-        <div className='d-flex  justify-content-between align-items-center my-3  bg-dark p-3 rounded'>
-          <h4 className='bg-light border border-3 border-warning  px-3 py-2 rounded shadow '>
-            {sortBySoldSelect ? 'Best sellers' : 'New Arrivals'}
-          </h4>
+        <div className='  d-flex  justify-content-between align-items-center my-3  bg-dark p-3 rounded'>
+          <h2 className='text-white '>
+            {sortBySoldSelect ? 'Best Sellers' : 'New Arrivals'}
+          </h2>
 
-          <div className='d-flex justify-content-between align-items-center gap-3 bg-light border border-3 border-warning  px-3 py-2 rounded shadow '>
-            <h5> Sort</h5>
-            <div className='form-check form-check-inline'>
+          <div className='d-flex flex-column justify-content-between align-items-center  bg-light border border-3 border-warning  rounded shadow '>
+          
+            <div className='form-check form-check-inline '>
               <input
                 className='form-check-input'
                 type='radio'
@@ -53,7 +53,7 @@ const Home = () => {
                 onChange={() => setSortBySoldSelect(!sortBySoldSelect)}
               />
               <label className='form-check-label' htmlFor='inlineRadio1'>
-                Best Sellers
+             <small>Best Sellers</small>
               </label>
             </div>
             <div className='form-check form-check-inline'>
@@ -66,7 +66,7 @@ const Home = () => {
                 onChange={() => setSortBySoldSelect(!sortBySoldSelect)}
               />
               <label className='form-check-label' htmlFor='inlineRadio2'>
-                New Arrivals
+              <small>New Arrivals</small>
               </label>
             </div>
           </div>
