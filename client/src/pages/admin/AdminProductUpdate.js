@@ -32,6 +32,28 @@ const AdminProductUpdate = () => {
 
   const { slug } = params
 
+  const handleDelete = async (e) => {
+    e.preventDefault()
+    try {
+      let answer = window.confirm('Are you sure you want to Delete ?')
+      if (answer) {
+        const { data } = await axios.delete('/product/' + id)
+        if (data?.error) {
+          toast.error(data.error)
+        } else {
+          toast.success(`Product was Deleted`)
+          navigate('/dashboard/admin/products')
+        }
+      } else {
+        navigate('/dashboard/admin/products')
+        toast.success(`Deletion was cancelled by User`)
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error('Create category failed. Try Again')
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     // console.log(category, name, description, price, shipping, quantity)
@@ -85,8 +107,6 @@ const AdminProductUpdate = () => {
       setShipping(data.shipping)
       setQuantity(data.quantity)
       setId(data._id)
-
-      console.log(data)
     } catch (error) {
       console.log(error)
     }
@@ -111,12 +131,12 @@ const AdminProductUpdate = () => {
         textCol='text-warning'
       />
       <div className='container-fluid'>
-        <div className='row'>
+        <div className='row mb-4'>
           {/* Sidebar */}
 
           <AdminMenu />
           {/* Main */}
-          <div className='col-md-9'>
+          <div className='col-md-9 shadow p-2'>
             <div className='p-3 mb-2  border mt-1'>
               <h4 className='text-center '>Update Product </h4>
             </div>
@@ -127,10 +147,10 @@ const AdminProductUpdate = () => {
               <form onSubmit={handleSubmit}>
                 {photo ? (
                   <div className='row'>
-                    <div className='col-md-6 offset-md-3 '>
+                    <div className='col-md-6 offset-md-3  '>
                       <img
                         src={URL.createObjectURL(photo)}
-                        className='rounded  img-thumbnail'
+                        className='rounded  img-thumbnail shadow'
                         alt='product'
                       />
                     </div>
@@ -140,7 +160,7 @@ const AdminProductUpdate = () => {
                     <div className='col-md-6 offset-md-3 '>
                       <img
                         src={currentPhotoURL}
-                        className='rounded  img-thumbnail'
+                        className='rounded  img-thumbnail shadow'
                         alt='product'
                       />
                     </div>
@@ -274,9 +294,21 @@ const AdminProductUpdate = () => {
                   </div>
                 </div>
 
-                <button className='btn btn-warning mt-3  px-5 shadow'>
-                  Submit
-                </button>
+                <div className='d-grid gap-2 d-md-flex justify-content-md-around  a mb-4 '>
+                  <button
+                    type='submit'
+                    className='btn btn-warning   mt-3  px-5 shadow '
+                  >
+                    Update
+                  </button>
+                  <button
+                    type='button'
+                    className='btn btn-danger  mt-3  px-5 shadow'
+                    onClick={handleDelete}
+                  >
+                    Delete
+                  </button>
+                </div>
               </form>
             </div>
           </div>

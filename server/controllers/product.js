@@ -18,17 +18,16 @@ export const create = async (req, res) => {
       return
     }
 
-
     // Validation
-    if (!name || !name.trim()) return res.json('Name is required')
+    if (!name || !name.trim()) return res.json({ message: 'Name is required' })
     if (!description || !description.trim())
-      return res.json('Description is required')
-    if (!price) return res.json('Price is required')
-    if (!category || !category.trim()) return res.json('Category is required')
-    if (!quantity) return res.json('Quantity is required')
-    if (!shipping) return res.json('Shipping is required')
+      return res.json({ message: 'Description is required' })
+    if (!price) return res.json({ message: 'Price is required' })
+    if (!category || !category.trim()) return res.json({ message: 'Category is required' })
+    if (!quantity) return res.json({ message: 'quantity is required' })
+    if (!shipping) return res.json({ message: 'shipping is required' })
     if (photo && photo.size > 200000)
-      return res.json('Image should be under 2mb in size ')
+      return res.json({ message: 'Image should be under 2mb in size' })
 
     let photoCloudinaryInfo = {
       public_id: 'products2023/x9t6mmyhpwycqqywuduo',
@@ -64,7 +63,7 @@ export const list = async (req, res) => {
   try {
     const products = await Product.find({})
       .populate('category')
-      .limit(6)
+      // .limit(6)
       .sort({ createdAt: -1 })
     res.json({ count: products.length, products })
   } catch (error) {
@@ -118,6 +117,7 @@ export const update = async (req, res) => {
     const { name, description, price, category, quantity, shipping } =
       req.fields
     const { photo } = req.files
+    console.log(req.files)
 
     // Validation
     if (!name || !name.trim()) return res.json('Name is required')

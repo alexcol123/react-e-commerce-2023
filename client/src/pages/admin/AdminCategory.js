@@ -34,18 +34,23 @@ const AdminCategory = () => {
   const handleDelete = async (e) => {
     e.preventDefault()
     try {
-      alert('Are you sure')
-      const { data } = await axios.delete('/category/' + selected._id)
-      if (data?.error) {
-        toast.error(data.error)
+      let answer = window.confirm('Are you sure you want to Delete ?')
+      if (answer) {
+        const { data } = await axios.delete('/category/' + selected._id)
+        if (data?.error) {
+          toast.error(data.error)
+        } else {
+          loadCategories()
+          toast.success(`Category:   was Deleted`)
+          setName('')
+          setSelected(null)
+          setUpdatingName('')
+        }
+        setVisible(false)
       } else {
-        loadCategories()
-        toast.success(`Category:   was Deleted`)
-        setName('')
-        setSelected(null)
-        setUpdatingName('')
+        setVisible(false)
+        toast.success(`Deletion was cancelled by User`)
       }
-      setVisible(false)
     } catch (error) {
       console.log(error)
       toast.error('Create category failed. Try Again')
@@ -77,8 +82,6 @@ const AdminCategory = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      console.log('Post this category', name)
-
       const { data } = await axios.post('/category', { name })
       if (data?.error) {
         toast.error(data.error)
@@ -134,9 +137,9 @@ const AdminCategory = () => {
             <hr />
 
             <div className='col'>
-            <div className='p-3 mb-2  border mt-1'>
-              <h4 className='text-center '> Category List </h4>
-            </div>
+              <div className='p-3 mb-2  border mt-1'>
+                <h4 className='text-center '> Category List </h4>
+              </div>
               {categories?.map((c) => (
                 <button
                   onClick={(e) => {

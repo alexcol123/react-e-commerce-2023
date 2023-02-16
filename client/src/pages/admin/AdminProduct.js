@@ -15,9 +15,7 @@ const AdminProduct = () => {
   const navigate = useNavigate()
   // State
   const [categories, setCategories] = useState([])
-  console.log(categories)
 
-  console.log(categories)
   const [photo, setPhoto] = useState('')
 
   const [name, setName] = useState('')
@@ -26,8 +24,6 @@ const AdminProduct = () => {
   const [category, setCategory] = useState('Choose a Category')
   const [shipping, setShipping] = useState(false)
   const [quantity, setQuantity] = useState('')
-
-  console.log(category)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -51,6 +47,10 @@ const AdminProduct = () => {
 
       // console.log([...productData])
       const { data } = await axios.post('/product', productData)
+      if (data.message) {
+        toast.error(data.message)
+        return
+      }
 
       if (data?.error) {
         toast.error(data.error)
