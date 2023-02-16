@@ -130,7 +130,7 @@ const AdminProductUpdate = () => {
 '
         textCol='text-warning'
       />
-      <div className='container-fluid'>
+      <div className='container-lg'>
         <div className='row mb-4'>
           {/* Sidebar */}
 

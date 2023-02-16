@@ -35,7 +35,7 @@ const AdminProductList = () => {
 '
         textCol='text-warning'
       />
-      <div className='container-fluid'>
+      <div className='container-lg'>
         <div className='row'>
           {/* Sidebar */}
 
