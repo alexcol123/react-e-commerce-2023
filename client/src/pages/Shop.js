@@ -68,31 +68,15 @@ const Shop = () => {
     }
   }
 
-  // if (products.length === 0) {
-  //   return (
-  //     <div
-  //       style={{ minHeight: '100vh' }}
-  //       className='text-center h-100 d-flex flex-column  align-items-center justify-content-center '
-  //     >
-  //       <h1 className=''>No Products found </h1>
-  //       <p>With that filter criteria try clearing filters</p>
-
-  //       <div className='d-grid gap-3'>
-  //         <button
-  //           onClick={loadProducts}
-  //           className='btn btn-outline-danger shadow'
-  //           type='button'
-  //         >
-  //           Clear Filter
-  //         </button>
-  //       </div>
-  //     </div>
-  //   )
-  // }
+  const clearFilters = () => {
+    setCurrentCategory([])
+    setCurrentPriceRange([])
+    loadProducts()
+  }
 
   return (
     <>
-      <Jumbotron title='Adidad Shop ' subtitle={`Searching for: Products`} />
+      <Jumbotron title='Adidad Shop ' subtitle={`Products found: ${products.length}`} />
       <div className='container-lg my-3'>
         <div className='row '>
           {/* Sidebar */}
@@ -142,21 +126,24 @@ const Shop = () => {
             </div>
 
             <div className='row m-1 mb-4 py-3 px-2  rounded shadow-lg  rounded border border-1 border-white'>
-              {prices?.map((p) => (
-                <div key={p._id} className='form-check form-check-inline'>
-                  <input
-                    className='form-check-input'
-                    type='radio'
-                    name='inlineRadioOptions'
-                    id='inlineRadio2'
-                    value={p.arr}
-                    onChange={(e) => setCurrentPriceRange([e.target.value])}
-                  />
-                  <label className='form-check-label' htmlFor='inlineRadio2'>
-                    <small>{p.name}</small>
-                  </label>
-                </div>
-              ))}
+              {prices?.map((p) => {
+                return (
+                  <div key={p._id} className='form-check form-check-inline'>
+                    <input
+                      className='form-check-input'
+                      type='radio'
+                      name='inlineRadioOptions'
+                      id='inlineRadio2'
+                      value={p.arr}
+                      onChange={(e) => setCurrentPriceRange([e.target.value])}
+                      checked={p.arr.join() === currentPriceRange.toString()}
+                    />
+                    <label className='form-check-label' htmlFor='inlineRadio2'>
+                      <small>{p.name}</small>
+                    </label>
+                  </div>
+                )
+              })}
             </div>
 
             <div className='d-grid gap-3'>
@@ -169,7 +156,7 @@ const Shop = () => {
               </button>
 
               <button
-                onClick={loadProducts}
+                onClick={clearFilters}
                 className='btn btn-outline-danger shadow'
                 type='button'
               >
@@ -181,7 +168,10 @@ const Shop = () => {
           {/* Main */}
           <div className='col-md-10'>
             {/*  Products */}
-            <div className='row row-cols-1 row-cols-lg-2  row-cols-xl-3  g-2'>
+            <div
+              style={{ height: '80vh', overflow: 'scroll' }}
+              className='row row-cols-1 row-cols-lg-2  row-cols-xl-3  g-2'
+            >
               {products.length ? (
                 products?.map((p) => <ProductCard key={p?._id} p={p} />)
               ) : (
@@ -192,7 +182,7 @@ const Shop = () => {
 
                   <div className='d-grid gap-3'>
                     <button
-                      onClick={loadProducts}
+                      onClick={clearFilters}
                       className='btn btn-outline-danger shadow'
                       type='button'
                     >
