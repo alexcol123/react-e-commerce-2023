@@ -21,11 +21,18 @@
   flex-direction: column;
 }
 
+.card {
+  border: solid 3px transparent;
+  transition: all 0.3s ease-in;
+}
+
+.card:hover {
+  border: solid 3px #ffc106;
+}
+
 .card:hover .myAbsoluteCard {
   opacity: 70%;
-  transition: all .3s ease-in;
-
-
+  transition: all 0.3s ease-in;
 }
 
 .myModal {

@@ -23,7 +23,8 @@ export const create = async (req, res) => {
     if (!description || !description.trim())
       return res.json({ message: 'Description is required' })
     if (!price) return res.json({ message: 'Price is required' })
-    if (!category || !category.trim()) return res.json({ message: 'Category is required' })
+    if (!category || !category.trim())
+      return res.json({ message: 'Category is required' })
     if (!quantity) return res.json({ message: 'quantity is required' })
     if (!shipping) return res.json({ message: 'shipping is required' })
     if (photo && photo.size > 200000)
@@ -63,7 +64,7 @@ export const list = async (req, res) => {
   try {
     const products = await Product.find({})
       .populate('category')
-       .limit(100)
+      .limit(100)
       .sort({ createdAt: -1 })
     res.json({ count: products.length, products })
   } catch (error) {
@@ -171,6 +172,34 @@ export const update = async (req, res) => {
     )
     res.json(product)
   } catch (err) {
+    console.log(err)
+    return res.status(400).json(err)
+  }
+}
+
+export const filterProducts = async (req, res) => {
+  try {
+    const { currentCategory, priceRanges } = req.body
+
+    console.log(currentCategory)
+    console.log(typeof priceRanges)
+    let args = {}
+    if (currentCategory.length > 0) args.category = currentCategory
+    if (priceRanges.length > 0)
+      args.price = { $gte: +priceRanges[0], $lte: +priceRanges[1] }
+
+    console.log(args)
+
+    const products = await Product.find(
+      args
+      //  price: args.price,
+      //category: args.category,
+    )
+      .populate('category')
+      .limit(100)
+      .sort({ createdAt: -1 })
+    res.json(products)
+  } catch (error) {
     console.log(err)
     return res.status(400).json(err)
   }

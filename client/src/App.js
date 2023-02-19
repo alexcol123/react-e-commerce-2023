@@ -16,6 +16,7 @@ import UserProfile from './pages/user/UserProfile'
 import UserOrders from './pages/user/UserOrders'
 import AdminProductList from './pages/admin/AdminProductList'
 import AdminProductUpdate from './pages/admin/AdminProductUpdate'
+import Shop from './pages/Shop'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Toaster />
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/shop' element={<Shop />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
 

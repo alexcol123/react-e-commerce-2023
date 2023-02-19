@@ -33,27 +33,28 @@ const Menu = () => {
         </button>
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
+            <li className='nav-item '>
+              <NavLink
+                className='nav-link text-white '
+                aria-current='page'
+                to='/'
+              >
+                Home
+              </NavLink>
+            </li>
+
+            <li className='nav-item  '>
+              <NavLink
+                className='nav-link text-white '
+                aria-current='page'
+                to='/shop'
+              >
+                Shop
+              </NavLink>
+            </li>
+
             {!auth?.user ? (
               <>
-                <li className='nav-item '>
-                  <NavLink
-                    className='nav-link text-white '
-                    aria-current='page'
-                    to='/'
-                  >
-                    Home
-                  </NavLink>
-                </li>
-                <li className='nav-item '>
-                  <NavLink
-                    className='nav-link text-white '
-                    aria-current='page'
-                    to='/dashboard/secret'
-                  >
-                    Secret
-                  </NavLink>
-                </li>
-
                 <li className='nav-item'>
                   <NavLink
                     className='nav-link text-white '
@@ -76,15 +77,6 @@ const Menu = () => {
             ) : (
               <>
                 {' '}
-                <li className='nav-item '>
-                  <NavLink
-                    className='nav-link text-white '
-                    aria-current='page'
-                    to='/'
-                  >
-                    Home
-                  </NavLink>
-                </li>
                 <li className='nav-item dropdown'>
                   <div
                     className='nav-link text-white dropdown-toggle'
