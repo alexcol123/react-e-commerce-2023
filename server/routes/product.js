@@ -9,6 +9,7 @@ import {
   filterProducts,
   productsCount,
   listProducts,
+  productsSearch
 } from '../controllers/product.js'
 
 // Middlewares
@@ -30,5 +31,7 @@ router.post('/filter-products', filterProducts)
 router.get('/products-count', productsCount)
 // pagination
 router.get('/list-products/:page', listProducts)
+// search by keyword
+router.get('/products/search/:keyword', productsSearch)
 
 export default router

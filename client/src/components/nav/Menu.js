@@ -1,17 +1,38 @@
-import React from 'react'
+// import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/auth'
 import { TbLogout } from 'react-icons/tb'
+import axios from 'axios'
+
+import { useSearch } from '../../context/search'
 
 const Menu = () => {
   const [auth, setAuth] = useAuth()
   const navigate = useNavigate()
+
+  // const [keyword, setKeyword] = useState('')
+  // const [results, setResults] = useState([])
+
+  // Hooks
+  const [values, setValues] = useSearch()
 
   const logout = (e) => {
     e.preventDefault()
     setAuth({ ...auth, user: null, token: '' })
     localStorage.removeItem('auth')
     navigate('/')
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      if (values.keyword === '') return
+      const { data } = await axios.get(`products/search/` + values.keyword)
+      setValues({ ...values, results: data })
+      navigate('/search')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -110,12 +131,16 @@ const Menu = () => {
               </>
             )}
           </ul>
-          <form className='d-flex' role='search'>
+          <form onSubmit={handleSubmit} className='d-flex' role='search'>
             <input
               className='form-control me-2'
               type='search'
               placeholder='Search'
               aria-label='Search'
+              value={values.keyword}
+              onChange={(e) =>
+                setValues({ ...values, keyword: e.target.value })
+              }
             />
             <button
               className='btn btn-outline-warning flex align-items-center '

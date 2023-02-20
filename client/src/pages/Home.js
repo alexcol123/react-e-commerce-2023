@@ -20,7 +20,7 @@ const Home = () => {
   // Loading
   const [loading, setLoading] = useState(false)
 
-  console.log(total)
+
 
   const sortedBySold = arrBySold?.sort((a, b) => (a.sold < b.sold ? 1 : -1))
   const sortedByReleased = arrByReleaded?.sort((a, b) =>

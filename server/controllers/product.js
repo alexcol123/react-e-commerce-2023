@@ -232,3 +232,25 @@ export const listProducts = async (req, res) => {
     return res.status(400).json(err)
   }
 }
+
+export const productsSearch = async (req, res) => {
+  try {
+    const { keyword } = req.params
+
+    console.log(keyword)
+
+    const products = await Product.find({
+      $or: [
+        { name: { $regex: keyword, $options: 'i' } },
+        { description: { $regex: keyword, $options: 'i' } },
+      ],
+    })
+
+
+
+     res.json(products)
+  } catch (error) {
+    console.log(err)
+    return res.status(400).json(err)
+  }
+}
