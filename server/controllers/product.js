@@ -64,7 +64,7 @@ export const list = async (req, res) => {
   try {
     const products = await Product.find({})
       .populate('category')
-      .limit(100)
+      // .limit(100)
       .sort({ createdAt: -1 })
     res.json({ count: products.length, products })
   } catch (error) {
@@ -198,6 +198,34 @@ export const filterProducts = async (req, res) => {
       .populate('category')
       .limit(100)
       .sort({ createdAt: -1 })
+    res.json(products)
+  } catch (error) {
+    console.log(err)
+    return res.status(400).json(err)
+  }
+}
+
+export const productsCount = async (req, res) => {
+  try {
+    const total = await Product.find().countDocuments()
+
+    res.json(total)
+  } catch (error) {
+    console.log(err)
+    return res.status(400).json(err)
+  }
+}
+
+export const listProducts = async (req, res) => {
+  try {
+    const perPage = 6
+    const page = req.params.page || 1
+
+    const products = await Product.find({})
+      .skip((page - 1) * perPage)
+      .limit(perPage)
+      .sort({ createdAt: -1 })
+
     res.json(products)
   } catch (error) {
     console.log(err)

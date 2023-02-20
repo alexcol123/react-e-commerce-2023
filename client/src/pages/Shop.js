@@ -76,7 +76,10 @@ const Shop = () => {
 
   return (
     <>
-      <Jumbotron title='Adidad Shop ' subtitle={`Products found: ${products.length}`} />
+      <Jumbotron
+        title='Adidad Shop '
+        subtitle={`Products found: ${products.length}`}
+      />
       <div className='container-lg my-3'>
         <div className='row '>
           {/* Sidebar */}
