@@ -13,21 +13,46 @@ const Home = () => {
   const arrBySold = [...products]
   const arrByReleaded = [...products]
 
+  // Server total product count
+  const [total, setTotal] = useState(0)
+  // Page Number
+  const [page, setPage] = useState(1)
+  // Loading
+  const [loading, setLoading] = useState(false)
+
+  console.log(total)
+
   const sortedBySold = arrBySold?.sort((a, b) => (a.sold < b.sold ? 1 : -1))
   const sortedByReleased = arrByReleaded?.sort((a, b) =>
     a.createdAt < b.createdAt ? 1 : -1
   )
 
   useEffect(() => {
-    loadProducts()
+    getTotal()
   }, [])
 
-  const loadProducts = async () => {
+  useEffect(() => {
+    loadProducts()
+  }, [page])
+
+  const getTotal = async () => {
     try {
-      const { data } = await axios.get('/products')
-      setProducts(data.products)
+      const { data } = await axios.get('products-count')
+      setTotal(data)
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  const loadProducts = async () => {
+    setLoading(true)
+    try {
+      const { data } = await axios.get('/list-products/' + page)
+      setProducts([...data, ...products])
+      setLoading(false)
+    } catch (error) {
+      console.log(error)
+      setLoading(false)
     }
   }
 
@@ -42,7 +67,6 @@ const Home = () => {
           </h2>
 
           <div className='d-flex flex-column justify-content-between align-items-center  bg-light border border-3 border-warning  rounded shadow '>
-          
             <div className='form-check form-check-inline '>
               <input
                 className='form-check-input'
@@ -53,7 +77,7 @@ const Home = () => {
                 onChange={() => setSortBySoldSelect(!sortBySoldSelect)}
               />
               <label className='form-check-label' htmlFor='inlineRadio1'>
-             <small>Best Sellers</small>
+                <small>Best Sellers</small>
               </label>
             </div>
             <div className='form-check form-check-inline'>
@@ -66,7 +90,7 @@ const Home = () => {
                 onChange={() => setSortBySoldSelect(!sortBySoldSelect)}
               />
               <label className='form-check-label' htmlFor='inlineRadio2'>
-              <small>New Arrivals</small>
+                <small>New Arrivals</small>
               </label>
             </div>
           </div>
@@ -90,6 +114,19 @@ const Home = () => {
                 <ProductCard key={p?._id} p={p} />
               ))}
             </>
+          )}
+        </div>
+
+        <div className='d-grid gap-2 col-4 mx-auto my-5'>
+          {products.length < total && (
+            <button
+              onClick={() => setPage(page + 1)}
+              className='btn btn-dark text-white  shadow'
+              type='button'
+              disabled={loading}
+            >
+              {loading ? 'Loading' : 'Load More'}
+            </button>
           )}
         </div>
       </div>

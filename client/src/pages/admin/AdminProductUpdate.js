@@ -100,12 +100,12 @@ const AdminProductUpdate = () => {
       // set existing photo
       setcurrentPhotoURL(data.photo.url)
 
-      setName(data.name)
-      setDescription(data.description)
-      setPrice(data.price)
-      setCategory(data.category)
-      setShipping(data.shipping)
-      setQuantity(data.quantity)
+      setName(data.name || '')
+      setDescription(data.description || '')
+      setPrice(data.price || 0)
+      setCategory(data.category || '')
+      setShipping(data.shipping|| false)
+      setQuantity(data.quantity|| 0)
       setId(data._id)
     } catch (error) {
       console.log(error)

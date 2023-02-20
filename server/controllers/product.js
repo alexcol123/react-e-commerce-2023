@@ -64,7 +64,7 @@ export const list = async (req, res) => {
   try {
     const products = await Product.find({})
       .populate('category')
-      // .limit(100)
+      .limit(9)
       .sort({ createdAt: -1 })
     res.json({ count: products.length, products })
   } catch (error) {
