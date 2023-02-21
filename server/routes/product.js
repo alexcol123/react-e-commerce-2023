@@ -9,7 +9,8 @@ import {
   filterProducts,
   productsCount,
   listProducts,
-  productsSearch
+  productsSearch,
+  relatedProducts,
 } from '../controllers/product.js'
 
 // Middlewares
@@ -33,5 +34,7 @@ router.get('/products-count', productsCount)
 router.get('/list-products/:page', listProducts)
 // search by keyword
 router.get('/products/search/:keyword', productsSearch)
+// search related products
+router.get('/retated-products/:productId/:categoryId', relatedProducts)
 
 export default router

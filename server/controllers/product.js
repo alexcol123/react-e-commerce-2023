@@ -246,11 +246,27 @@ export const productsSearch = async (req, res) => {
       ],
     })
 
-
-
-     res.json(products)
+    res.json(products)
   } catch (error) {
     console.log(err)
     return res.status(400).json(err)
+  }
+}
+
+export const relatedProducts = async (req, res) => {
+  try {
+    const { productId, categoryId } = req.params
+
+    const related = await Product.find({
+      category: categoryId,
+      _id: { $ne: productId },
+    })
+      .populate('category')
+      .limit(10)
+
+    res.json(related)
+  } catch (error) {
+    console.log(error)
+    return res.status(400).json(error)
   }
 }

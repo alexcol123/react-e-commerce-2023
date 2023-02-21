@@ -18,18 +18,20 @@ import AdminProductList from './pages/admin/AdminProductList'
 import AdminProductUpdate from './pages/admin/AdminProductUpdate'
 import Shop from './pages/Shop'
 import Search from './pages/Search'
+import ProductView from './pages/ProductView'
 
 function App() {
   return (
     <BrowserRouter>
       <Menu />
 
-      <div style={{ marginTop: '55px' }} className=''>
+      <div style={{ marginTop: '55px' }} >
         <Toaster />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/shop' element={<Shop />} />
           <Route path='/search' element={<Search />} />
+          <Route path='/product/:slug' element={<ProductView />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
 

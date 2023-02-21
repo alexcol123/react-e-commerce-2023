@@ -69,7 +69,7 @@ const AdminProductList = () => {
                           {p.name}
                         </h4>
                         <p className='card-text mt-3'>
-                          {p.description.substring(0, 175)}...
+                          {p.description?.substring(0, 175)}...
                         </p>
                         <p className='card-text'>
                           <small className='text-warning-emphasis'>
