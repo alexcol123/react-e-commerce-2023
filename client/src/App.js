@@ -19,6 +19,7 @@ import AdminProductUpdate from './pages/admin/AdminProductUpdate'
 import Shop from './pages/Shop'
 import Search from './pages/Search'
 import ProductView from './pages/ProductView'
+import CategoriesList from './pages/CategoriesList'
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path='/product/:slug' element={<ProductView />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/categories' element={<CategoriesList />} />
 
           {/* User Private Routes  */}
           <Route path='/dashboard' element={<PrivateRoute />}>

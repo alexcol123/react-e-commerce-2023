@@ -3,12 +3,17 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/auth'
 import { TbLogout } from 'react-icons/tb'
 import axios from 'axios'
-
 import { useSearch } from '../../context/search'
+
+import useCategory from '../../hooks/useCategory'
 
 const Menu = () => {
   const [auth, setAuth] = useAuth()
   const navigate = useNavigate()
+
+  // Hooks
+  const categories = useCategory()
+ 
 
   // const [keyword, setKeyword] = useState('')
   // const [results, setResults] = useState([])
@@ -74,6 +79,41 @@ const Menu = () => {
               </NavLink>
             </li>
 
+            <li className='nav-item dropdown'>
+              <div
+                className='nav-link text-white dropdown-toggle'
+                role='button'
+                data-bs-toggle='dropdown'
+                aria-expanded='false'
+              >
+                Categories
+              </div>
+              <ul className='dropdown-menu m-1 p-1'>
+
+
+              <li className='nav-item  '>
+              <NavLink
+                className='nav-link  '
+                aria-current='page'
+                to='/categories'
+              >
+                Categories Page
+              </NavLink>
+            </li>
+
+                {categories.map((c) => (
+                  <li key={c._id} className='nav-item'>
+                    <NavLink
+                      className='dropdown-item bg-white dropdownItem'
+                      to={`/category/${c.slug}`}
+                    >
+                      {c.name}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </li>
+
             {!auth?.user ? (
               <>
                 <li className='nav-item'>
@@ -97,7 +137,6 @@ const Menu = () => {
               </>
             ) : (
               <>
-                {' '}
                 <li className='nav-item dropdown'>
                   <div
                     className='nav-link text-white dropdown-toggle'
