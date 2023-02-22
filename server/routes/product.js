@@ -37,4 +37,5 @@ router.get('/products/search/:keyword', productsSearch)
 // search related products
 router.get('/retated-products/:productId/:categoryId', relatedProducts)
 
+
 export default router

@@ -7,7 +7,6 @@ const CategoriesList = () => {
   // Hooks
   const categories = useCategory()
   const navigate = useNavigate()
-  console.log(categories)
 
   return (
     <div>

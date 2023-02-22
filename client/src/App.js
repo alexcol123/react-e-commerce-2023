@@ -20,6 +20,7 @@ import Shop from './pages/Shop'
 import Search from './pages/Search'
 import ProductView from './pages/ProductView'
 import CategoriesList from './pages/CategoriesList'
+import CategoryView from './pages/CategoryView'
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/categories' element={<CategoriesList />} />
+          <Route path='/category/:slug' element={<CategoryView />} />
 
           {/* User Private Routes  */}
           <Route path='/dashboard' element={<PrivateRoute />}>
