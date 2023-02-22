@@ -1,16 +1,19 @@
 // import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/auth'
-import { TbLogout ,TbShoppingCart } from 'react-icons/tb'
+import { TbLogout, TbShoppingCart } from 'react-icons/tb'
 
-import { BsFillCartCheckFill } from 'react-icons/bs'
+import { RiShoppingCartFill } from 'react-icons/ri'
 
 import axios from 'axios'
 import { useSearch } from '../../context/search'
 
 import useCategory from '../../hooks/useCategory'
+import { useCart } from '../../context/cart'
 
 const Menu = () => {
+  const [cart, setCart] = useCart()
+
   const [auth, setAuth] = useAuth()
   const navigate = useNavigate()
 
@@ -189,34 +192,26 @@ const Menu = () => {
             </button>
           </form>
 
-          {/* <ul className='navbar-nav me-auto mb-2 mb-lg-0  '>
-            <li className='nav-item '>
-              <NavLink
-                className='nav-link text-white '
-                aria-current='page'
-                to='/'
-              >
-                Home
-              </NavLink>
-            </li>
-          </ul> */}
-
-
-
-            <ul className='navbar-nav ms-5 mb-2 mb-lg-0'>
-              <li className='nav-item flex justify-content-between align-items-center '>
+          {/* Cart */}
+          <ul className='navbar-nav ms-5 mb-2 mb-lg-0'>
+            <li className='nav-item flex justify-content-between align-items-center position-relative '>
               <NavLink
                 className='nav-link text-white '
                 aria-current='page'
                 to='/cart'
               >
-                      <BsFillCartCheckFill className='text-warning fw-bold' size={25} />
+                <RiShoppingCartFill
+                  className='text-warning fw-bold'
+                  size={25}
+                />
+                {cart.length > 0 && (
+                  <span className='position-absolute top-25 start-100 translate-middle badge rounded-pill bg-danger'>
+                    {cart.length}
+                  </span>
+                )}
               </NavLink>
-
-              </li>
-            </ul>
-          
-
+            </li>
+          </ul>
 
           {auth.user && (
             <ul className='navbar-nav ms-5 mb-2 mb-lg-0'>

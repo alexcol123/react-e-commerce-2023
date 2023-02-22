@@ -4,8 +4,14 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import moment from 'moment'
 import ProductCard from '../components/cards/ProductCard'
+import {useCart} from '../context/cart'
+import {toast} from  'react-hot-toast'
 
 const ProductView = () => {
+  //Context 
+  const [cart, setCart]= useCart()
+  console.log(cart)
+
   const [product, setProduct] = useState({})
 
   const [relatedProducts, setrelatedProducts] = useState([])
@@ -42,7 +48,10 @@ const ProductView = () => {
   }
 
   const addToCart=()=>{
-    console.log('added : ' + product.name)
+   setCart([...cart, product])
+   const products=[...cart, product]
+   localStorage.setItem('cart', JSON.stringify(products))
+   toast.success(` Added to Cart`)
   }
 
   return (

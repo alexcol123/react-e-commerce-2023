@@ -2,6 +2,11 @@
   position: relative;
 }
 
+.myHover:hover {
+  background: rgba(0, 0, 0, 0.194) !important;
+  cursor: pointer;
+}
+
 .myAbsolute {
   position: absolute;
 }
