@@ -1,7 +1,10 @@
 // import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/auth'
-import { TbLogout } from 'react-icons/tb'
+import { TbLogout ,TbShoppingCart } from 'react-icons/tb'
+
+import { BsFillCartCheckFill } from 'react-icons/bs'
+
 import axios from 'axios'
 import { useSearch } from '../../context/search'
 
@@ -13,7 +16,6 @@ const Menu = () => {
 
   // Hooks
   const categories = useCategory()
- 
 
   // const [keyword, setKeyword] = useState('')
   // const [results, setResults] = useState([])
@@ -89,17 +91,15 @@ const Menu = () => {
                 Categories
               </div>
               <ul className='dropdown-menu m-1 p-1'>
-
-
-              <li className='nav-item  '>
-              <NavLink
-                className='nav-link  '
-                aria-current='page'
-                to='/categories'
-              >
-                Categories Page
-              </NavLink>
-            </li>
+                <li className='nav-item  '>
+                  <NavLink
+                    className='nav-link  '
+                    aria-current='page'
+                    to='/categories'
+                  >
+                    Categories Page
+                  </NavLink>
+                </li>
 
                 {categories.map((c) => (
                   <li key={c._id} className='nav-item'>
@@ -182,12 +182,42 @@ const Menu = () => {
               }
             />
             <button
-              className='btn btn-outline-warning flex align-items-center '
+              className='btn btn-outline-warning flex align-items-center  '
               type='submit'
             >
               Search
             </button>
           </form>
+
+          {/* <ul className='navbar-nav me-auto mb-2 mb-lg-0  '>
+            <li className='nav-item '>
+              <NavLink
+                className='nav-link text-white '
+                aria-current='page'
+                to='/'
+              >
+                Home
+              </NavLink>
+            </li>
+          </ul> */}
+
+
+
+            <ul className='navbar-nav ms-5 mb-2 mb-lg-0'>
+              <li className='nav-item flex justify-content-between align-items-center '>
+              <NavLink
+                className='nav-link text-white '
+                aria-current='page'
+                to='/cart'
+              >
+                      <BsFillCartCheckFill className='text-warning fw-bold' size={25} />
+              </NavLink>
+
+              </li>
+            </ul>
+          
+
+
           {auth.user && (
             <ul className='navbar-nav ms-5 mb-2 mb-lg-0'>
               <li className='nav-item flex justify-content-between align-items-center'>

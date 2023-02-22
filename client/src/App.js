@@ -21,6 +21,7 @@ import Search from './pages/Search'
 import ProductView from './pages/ProductView'
 import CategoriesList from './pages/CategoriesList'
 import CategoryView from './pages/CategoryView'
+import Cart from './pages/Cart'
 
 function App() {
   return (
@@ -38,6 +39,8 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/categories' element={<CategoriesList />} />
           <Route path='/category/:slug' element={<CategoryView />} />
+          <Route path='/cart' element={<Cart />} />
+
 
           {/* User Private Routes  */}
           <Route path='/dashboard' element={<PrivateRoute />}>

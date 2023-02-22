@@ -41,6 +41,10 @@ const ProductView = () => {
     }
   }
 
+  const addToCart=()=>{
+    console.log('added : ' + product.name)
+  }
+
   return (
     <div className='my-1'>
       <div className='container-lg'>
@@ -97,7 +101,7 @@ const ProductView = () => {
                     )}
                   </div>
                 </div>
-                <button href='#' className='btn btn-primary btn-dark m-2 my-4'>
+                <button onClick={ addToCart} href='#' className='btn btn-primary btn-dark m-2 my-4'>
                   Add To Cart
                 </button>
               </div>
