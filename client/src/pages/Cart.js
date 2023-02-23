@@ -130,7 +130,7 @@ const Cart = () => {
                               <h6>{auth?.user.address}</h6>
                             </pre>
                             <small className='p-2'>
-                              *If address is not correct please update 
+                              *If address is not correct please update
                             </small>
                             <button
                               onClick={() =>
@@ -159,7 +159,9 @@ const Cart = () => {
                       <div>
                         <div className='mt-5'>
                           <button
-                            onClick={() => navigate('/login')}
+                            onClick={() =>
+                              navigate('/login', { state: '/cart' })
+                            }
                             className='btn  btn-danger shadow btn-lg '
                           >
                             Login to Checkout
