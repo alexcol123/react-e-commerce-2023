@@ -8,9 +8,9 @@ const CartProvider = ({ children }) => {
 
   useEffect(() => {
     const cartItemsInLs = localStorage.getItem('cart')
-    console.log(cartItemsInLs)
+
     if (cartItemsInLs.length) {
-       setCart(JSON.parse(cartItemsInLs))
+      setCart(JSON.parse(cartItemsInLs))
     }
   }, [])
 

@@ -1,5 +1,7 @@
 import User from '../models/user.js'
 
+import jwt from 'jsonwebtoken'
+
 export const login = async (req, res) => {
   // Destructure
   const { email, password } = req.body
@@ -102,4 +104,37 @@ export const register = async (req, res) => {
 // Secret
 export const secret = async (req, res) => {
   res.json({ currentUser: req.user })
+}
+
+// Update profile
+export const updateProfile = async (req, res) => {
+  try {
+    const reveivedToken = req.headers.authorization
+    const { name, password, address } = req.body
+
+    if (password && password.length < 6) {
+      return res.json({
+        error: 'Password is required and should be a min of 6 characters long',
+      })
+    }
+
+    const decoded = jwt.verify(reveivedToken, process.env.JWT_SECRET)
+
+    const user = await User.findById(decoded._id)
+
+    user.name = name || user.name
+    user.password = password || user.password
+    user.address = address || user.address
+
+    await user.save()
+
+    // Create JWT
+    const token = await user.createJWT()
+    res.status(200).json({
+      user,
+      token,
+    })
+  } catch (err) {
+    console.log(err)
+  }
 }

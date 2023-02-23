@@ -9,15 +9,18 @@ const Cart = () => {
   // Context
   const [cart, setCart] = useCart()
   const [auth, setAuth] = useAuth()
-  console.log(cart)
+
+  const cartTotal = cart.reduce((total, item) => (total += item.price),0)
+  console.log(cartTotal)
+
   // Hooks
   const navigate = useNavigate()
 
   const removeFromCart = (p) => {
-    let updatedCart =(cart.filter((c) => c._id !== p._id))
+    let updatedCart = cart.filter((c) => c._id !== p._id)
     setCart(updatedCart)
- 
-   localStorage.setItem('cart', JSON.stringify(updatedCart))
+
+    localStorage.setItem('cart', JSON.stringify(updatedCart))
   }
 
   return (
@@ -110,7 +113,12 @@ const Cart = () => {
                       ))}
                     </div>
                   </div>
-                  <div className='col-md-4'>Total / Address / Payments</div>
+                  <div className='col-md-4 bg-white p-3'>
+                    <h4 >Cart Summary</h4>
+                    <div >Total / Address / Payments</div>
+                    <hr />
+                    <h5>Total: ${cartTotal.toFixed(2)}</h5>
+                  </div>
                 </div>
               </div>
             )}
