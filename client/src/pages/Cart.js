@@ -10,8 +10,8 @@ const Cart = () => {
   const [cart, setCart] = useCart()
   const [auth, setAuth] = useAuth()
 
-  const cartTotal = cart.reduce((total, item) => (total += item.price),0)
-  console.log(cartTotal)
+  const cartTotal = cart.reduce((total, item) => (total += item.price), 0)
+  console.log(auth)
 
   // Hooks
   const navigate = useNavigate()
@@ -113,11 +113,60 @@ const Cart = () => {
                       ))}
                     </div>
                   </div>
-                  <div className='col-md-4 bg-white p-3'>
-                    <h4 >Cart Summary</h4>
-                    <div >Total / Address / Payments</div>
+                  <div className='col-md-4 bg-white p-3 text-center'>
+                    <h4>Cart Summary</h4>
+                    <div>Total / Address / Payments</div>
                     <hr />
                     <h5>Total: ${cartTotal.toFixed(2)}</h5>
+
+                    {auth?.user ? (
+                      <div>
+                        {auth?.user?.address ? (
+                          <div className='mb-3'>
+                            <hr />
+
+                            <h4>Address: </h4>
+                            <pre>
+                              <h6>{auth?.user.address}</h6>
+                            </pre>
+                            <small className='p-2'>
+                              *If address is not correct please update 
+                            </small>
+                            <button
+                              onClick={() =>
+                                navigate('/dashboard/user/profile')
+                              }
+                              className='btn btn-sm  btn-outline-danger shadow mt-1'
+                            >
+                              Update Address
+                            </button>
+                          </div>
+                        ) : (
+                          <div className='mt-5'>
+                            <h5>Add Address to continue </h5>
+                            <button
+                              onClick={() =>
+                                navigate('/dashboard/user/profile')
+                              }
+                              className='btn  btn-danger shadow btn-lg '
+                            >
+                              Address +
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div>
+                        <div className='mt-5'>
+                          <button
+                            onClick={() => navigate('/login')}
+                            className='btn  btn-danger shadow btn-lg '
+                          >
+                            Login to Checkout
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

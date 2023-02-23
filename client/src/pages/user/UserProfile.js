@@ -10,7 +10,6 @@ const UserProfile = () => {
   // Context
   const [auth, setAuth] = useAuth()
 
-  console.log(auth)
 
   // State
   const [name, setName] = useState('')
@@ -40,6 +39,7 @@ const UserProfile = () => {
       }
       // Update user auth
       setAuth(data)
+      console.log(data)
       // update in ls
       localStorage.setItem('auth', JSON.stringify(data))
       // Show toast 
