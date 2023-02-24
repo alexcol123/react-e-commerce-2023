@@ -4,14 +4,15 @@ import { useCart } from '../context/cart'
 import Jumbotron from '../components/cards/Jumbotron'
 import { useNavigate } from 'react-router-dom'
 import { BsTrash } from 'react-icons/bs'
+import UserCartSidebar from '../components/cards/UserCartSidebar'
+import ProductCardHorizontal from '../components/cards/ProductCardHorizontal'
 
 const Cart = () => {
   // Context
   const [cart, setCart] = useCart()
   const [auth, setAuth] = useAuth()
 
-  const cartTotal = cart.reduce((total, item) => (total += item.price), 0)
-  console.log(auth)
+  // const cartTotal = cart.reduce((total, item) => (total += item.price), 0)
 
   // Hooks
   const navigate = useNavigate()
@@ -64,112 +65,63 @@ const Cart = () => {
                   <div className='col-md-8 '>
                     <div className='row'>
                       {cart?.map((p) => (
-                        <div
+                        <ProductCardHorizontal
+                          p={p}
                           key={p._id}
-                          className='card shadow mb-3 p-0'
-                          style={{ maxWidth: 540 }}
-                        >
-                          <div className='row g-0'>
-                            <div className='col-md-4'>
-                              <img
-                                src={p.photo.url}
-                                alt={p.name}
-                                className='img-fluid '
-                              />
-                            </div>
+                          removeFromCart={removeFromCart}
+                        />
+                        // <div
+                        //   key={p._id}
+                        //   className='card shadow mb-3 p-0'
+                        //   style={{ maxWidth: 540 }}
+                        // >
+                        //   <div className='row g-0'>
+                        //     <div className='col-md-4'>
+                        //       <img
+                        //         src={p.photo.url}
+                        //         alt={p.name}
+                        //         className='img-fluid '
+                        //       />
+                        //     </div>
 
-                            <div className='col-md-8 h-100  '>
-                              <div className='card-body h-100  d-flex flex-column justify-content-between'>
-                                <div className='d-flex justify-content-between '>
-                                  <h5 className='card-title text-warning-emphasis fw-bold'>
-                                    {p.name}
-                                  </h5>
+                        //     <div className='col-md-8 h-100  '>
+                        //       <div className='card-body h-100  d-flex flex-column justify-content-between'>
+                        //         <div className='d-flex justify-content-between '>
+                        //           <h5 className='card-title text-warning-emphasis fw-bold'>
+                        //             {p.name}
+                        //           </h5>
 
-                                  <span className=' card-title  bg-warning bg-opacity-100    p-1 rounded  shadow mx-1'>
-                                    ${p.price}
-                                  </span>
-                                </div>
+                        //           <span className=' card-title  bg-warning bg-opacity-100    p-1 rounded  shadow mx-1'>
+                        //             ${p.price}
+                        //           </span>
+                        //         </div>
 
-                                <div style={{ maxWidth: '80%' }}>
-                                  <small>
-                                    {p.description.substring(0, 70)}...
-                                  </small>
-                                </div>
+                        //         <div style={{ maxWidth: '80%' }}>
+                        //           <small>
+                        //             {p.description.substring(0, 70)}...
+                        //           </small>
+                        //         </div>
 
-                                <div className='align-self-end mt-2 '>
-                                  <button
-                                    onClick={() => removeFromCart(p)}
-                                    className='btn btn-outline-danger btn-sm px-2 py-0 '
-                                  >
-                                    Remove
-                                  </button>
-                                </div>
+                        //         <div className='align-self-end mt-2 '>
+                        //           <button
+                        //             onClick={() => removeFromCart(p)}
+                        //             className='btn btn-outline-danger btn-sm px-2 py-0 '
+                        //           >
+                        //             Remove
+                        //           </button>
+                        //         </div>
 
-                                <div></div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                        //         <div></div>
+                        //       </div>
+                        //     </div>
+                        //   </div>
+                        // </div>
                       ))}
                     </div>
                   </div>
-                  <div className='col-md-4 bg-white p-3 text-center'>
-                    <h4>Cart Summary</h4>
-                    <div>Total / Address / Payments</div>
-                    <hr />
-                    <h5>Total: ${cartTotal.toFixed(2)}</h5>
 
-                    {auth?.user ? (
-                      <div>
-                        {auth?.user?.address ? (
-                          <div className='mb-3'>
-                            <hr />
-
-                            <h4>Address: </h4>
-                            <pre>
-                              <h6>{auth?.user.address}</h6>
-                            </pre>
-                            <small className='p-2'>
-                              *If address is not correct please update
-                            </small>
-                            <button
-                              onClick={() =>
-                                navigate('/dashboard/user/profile')
-                              }
-                              className='btn btn-sm  btn-outline-danger shadow mt-1'
-                            >
-                              Update Address
-                            </button>
-                          </div>
-                        ) : (
-                          <div className='mt-5'>
-                            <h5>Add Address to continue </h5>
-                            <button
-                              onClick={() =>
-                                navigate('/dashboard/user/profile')
-                              }
-                              className='btn  btn-danger shadow btn-lg '
-                            >
-                              Address +
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      <div>
-                        <div className='mt-5'>
-                          <button
-                            onClick={() =>
-                              navigate('/login', { state: '/cart' })
-                            }
-                            className='btn  btn-danger shadow btn-lg '
-                          >
-                            Login to Checkout
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </div>
+                  {/*  Cart Summary */}
+                  <UserCartSidebar cart={cart} setCart={setCart} />
                 </div>
               </div>
             )}

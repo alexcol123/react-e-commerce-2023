@@ -33,16 +33,18 @@ export const getToken = async (req, res) => {
 // const myToken = getToken()
 // console.log(getToken())
 
-export const processPayment = async () => {
+export const processPayment = async (req, res) => {
   try {
-    console.log(req.body)
-    let nonceFromTheClient = req.body.paymentMehodNonce
+    let { nonce, cart } = req.body
+
+    let total = 0
+    total = cart.reduce((acc, item) => (acc += item.price), 0)
 
     let newTransaction = gateway.transaction.sale(
       {
         //
-        amount: '10.00',
-        paymentMethodNonce: nonceFromTheClient,
+        amount: total,
+        paymentMethodNonce: nonce,
         options: {
           submitForSettlement: true,
         },
@@ -56,7 +58,7 @@ export const processPayment = async () => {
       }
     )
   } catch (error) {
-    console.log(err)
+    console.log(error)
     return res.status(400).json(err)
   }
 }
