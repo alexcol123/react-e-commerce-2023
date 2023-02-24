@@ -11,6 +11,8 @@ import {
   listProducts,
   productsSearch,
   relatedProducts,
+  getToken,
+  processPayment,
 } from '../controllers/product.js'
 
 // Middlewares
@@ -37,5 +39,9 @@ router.get('/products/search/:keyword', productsSearch)
 // search related products
 router.get('/retated-products/:productId/:categoryId', relatedProducts)
 
+// Braintree
+router.get('/braintree/token', getToken)
+router.post('/braintree/payment', processPayment)
+// router.post('/braintree/payment', requireSignin, processPayment)
 
 export default router
