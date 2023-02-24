@@ -3,6 +3,7 @@ import slugyfy from 'slugify'
 import cloudinary from 'cloudinary'
 import braintree from 'braintree'
 import dotenv from 'dotenv'
+import Order from '../models/Order.js'
 
 // dotenv config
 dotenv.config()
@@ -51,9 +52,17 @@ export const processPayment = async (req, res) => {
       },
       function (err, result) {
         if (result) {
-          res.send(result)
+          // res.send(result)
+
+          // Create order
+          const order = new Order({
+            products: cart,
+            payment: result,
+            buyer: req.user._id,
+          }).save()
+          res.json({ ok: true })
         } else {
-          res.status(500).send(error)
+          res.status(500).send(err)
         }
       }
     )

@@ -13,6 +13,7 @@ const UserCartSidebar = ({ cart, setCart }) => {
   // State
   const [clientToken, setClientToken] = useState('')
   const [instance, setInstance] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const cartTotal = cart.reduce((total, item) => (total += item.price), 0)
 
@@ -27,19 +28,23 @@ const UserCartSidebar = ({ cart, setCart }) => {
 
   const handleBuy = async () => {
     try {
+      setLoading(true)
       const { nonce } = await instance.requestPaymentMethod()
 
       const { data } = await axios.post('/braintree/payment', { nonce, cart })
 
-      if (data?.success === true) {
+      if (data?.ok === true) {
+        setLoading(false)
         localStorage.removeItem('cart')
         setCart([])
         navigate('/dashboard/user/orders')
         toast.success(' Payment Successfull')
       } else {
+        setLoading(false)
         toast.error(' Payment failed try again')
       }
     } catch (error) {
+      setLoading(false)
       console.log(error)
     }
   }
@@ -114,10 +119,10 @@ const UserCartSidebar = ({ cart, setCart }) => {
 
             <button
               onClick={handleBuy}
-              disabled={!auth?.user?.address || !instance}
+              disabled={!auth?.user?.address || !instance || loading}
               className='btn btn-danger col-12 my-2'
             >
-              Pay Now
+              {loading ? ' Processing' : 'Pay Now'}
             </button>
           </>
         )}
