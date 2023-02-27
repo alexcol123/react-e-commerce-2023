@@ -9,7 +9,7 @@ const CartProvider = ({ children }) => {
   useEffect(() => {
     const cartItemsInLs = localStorage.getItem('cart')
 
-    if (cartItemsInLs.length) {
+    if (cartItemsInLs?.length) {
       setCart(JSON.parse(cartItemsInLs))
     }
   }, [])

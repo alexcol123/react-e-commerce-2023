@@ -22,6 +22,7 @@ import ProductView from './pages/ProductView'
 import CategoriesList from './pages/CategoriesList'
 import CategoryView from './pages/CategoryView'
 import Cart from './pages/Cart'
+import AdminOrders from './pages/admin/AdminOrders'
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
           <Route path='/dashboard' element={<AdminRoute />}>
             <Route path='admin' element={<AdminDashboard />} />
             <Route path='admin/product' element={<AdminProduct />} />
+            <Route path='admin/orders' element={<AdminOrders />} />
             <Route path='admin/category' element={<AdminCategory />} />
             <Route path='admin/products' element={<AdminProductList />} />
             <Route path='admin/product/update/:slug' element={<AdminProductUpdate />} />

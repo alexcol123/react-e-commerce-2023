@@ -41,7 +41,8 @@ router.get('/retated-products/:productId/:categoryId', relatedProducts)
 
 // Braintree
 router.get('/braintree/token', getToken)
-
 router.post('/braintree/payment', requireSignin, processPayment)
+
+// Admin update order Status
 
 export default router

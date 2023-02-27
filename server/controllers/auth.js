@@ -1,7 +1,52 @@
 import User from '../models/user.js'
+import Order from '../models/Order.js'
 
 import jwt from 'jsonwebtoken'
 
+// Admin Update user order status
+
+export const updateOrderStatus = async (req, res) => {
+  const orderId = req.params.orderId
+
+  try {
+    const orderStatusUpdate = await Order.findByIdAndUpdate(orderId, req.body, {
+      new: true,
+    })
+
+    res.json({ message: 'Order status updated' })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// Admin Get  login user orders
+
+export const getAllOrders = async (req, res) => {
+  try {
+    const orders = await Order.find()
+      .populate('products')
+      .populate('buyer', 'name')
+    res.json(orders)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// Get  login user orders
+
+export const getOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({ buyer: req.user._id })
+      .populate('products')
+      .populate('buyer', 'name')
+    res.json(orders)
+    // console.log(orders)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// Login
 export const login = async (req, res) => {
   // Destructure
   const { email, password } = req.body

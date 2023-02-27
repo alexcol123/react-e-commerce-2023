@@ -38,6 +38,8 @@ export const processPayment = async (req, res) => {
   try {
     let { nonce, cart } = req.body
 
+    console.log(cart)
+
     let total = 0
     total = cart.reduce((acc, item) => (acc += item.price), 0)
 
@@ -60,6 +62,10 @@ export const processPayment = async (req, res) => {
             payment: result,
             buyer: req.user._id,
           }).save()
+
+          // Decrement product quantity
+          decrementQuantity(cart)
+
           res.json({ ok: true })
         } else {
           res.status(500).send(err)
@@ -69,6 +75,24 @@ export const processPayment = async (req, res) => {
   } catch (error) {
     console.log(error)
     return res.status(400).json(err)
+  }
+}
+// Decrement quantity
+const decrementQuantity = async (cart) => {
+  try {
+    const bulkOps = cart.map((item) => {
+      return {
+        updateOne: {
+          filter: { _id: item._id },
+          update: { $inc: { quantity: -1, sold: +1 } },
+        },
+      }
+    })
+
+    const updated = await Product.bulkWrite(bulkOps, {})
+    console.log('blk updated', updated)
+  } catch (error) {
+    console.log(error)
   }
 }
 

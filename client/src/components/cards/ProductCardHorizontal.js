@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProductCardHorizontal = ({p, removeFromCart}) => {
+const ProductCardHorizontal = ({ p, removeFromCart, remove = true }) => {
   return (
     <div key={p._id} className='card shadow mb-3 p-0' style={{ maxWidth: 540 }}>
       <div className='row g-0'>
@@ -25,12 +25,14 @@ const ProductCardHorizontal = ({p, removeFromCart}) => {
             </div>
 
             <div className='align-self-end mt-2 '>
-              <button
-                onClick={() => removeFromCart(p)}
-                className='btn btn-outline-danger btn-sm px-2 py-0 '
-              >
-                Remove
-              </button>
+              {remove && (
+                <button
+                  onClick={() => removeFromCart(p)}
+                  className='btn btn-outline-danger btn-sm px-2 py-0 '
+                >
+                  Remove
+                </button>
+              )}
             </div>
 
             <div></div>

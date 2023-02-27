@@ -94,7 +94,7 @@ const ProductView = () => {
                   <div className='card-text d-flex   text- justify-content-between  text-warning-emphasis'>
                     <small>Category: {product?.category?.name}</small>
                     <small>
-                      Available: {product?.quantity - product?.sold}
+                      Available: {product?.quantity}
                     </small>
                   </div>
 
